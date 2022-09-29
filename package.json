@@ -1,0 +1,78 @@
+{
+  "name": "mds-map",
+  "description": "Markdown to Mindmap",
+  "version": "23",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "license": "AGPL",
+  "scripts": {
+    "test": "jest",
+    "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet",
+    "tc": "tsc",
+    "start": "start-storybook -p 6006",
+    "build": "tsc",
+    "preversion": "yarn build",
+    "watch": "yarn tsc-watch",
+    "build-storybook": "build-storybook"
+  },
+  "serve": {
+    "open": true,
+    "static": "example/dist"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "dist"
+    ]
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "remarkable": "2.0.1",
+    "d3": "3.5.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "@storybook/addon-actions": "^6.5.10",
+    "@storybook/addon-essentials": "^6.5.10",
+    "@storybook/addon-links": "^6.5.10",
+    "@storybook/react": "^6.5.10",
+    "@types/jest": "^27.4.1",
+    
+    "@types/react": "^17.0.43",
+    "@types/react-dom": "^17.0.14",
+    
+    "@typescript-eslint/eslint-plugin": "^5.17.0",
+    "@typescript-eslint/parser": "^5.17.0",
+    "babel-jest": "^27.5.1",
+    "babel-loader": "^8.2.4",
+    "eslint": "^8.12.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-react-app": "^7.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.4.0",
+    "jest": "^27.5.1",
+    "prettier": "^2.6.2",
+    
+    "source-map-loader": "^3.0.1",
+    "ts-loader": "^9.2.8",
+    "tsc-watch": "^4.6.2",
+    "typescript": "4.7.4"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0 || ^17.0.0",
+    "react-dom": "^16.0.0 || ^17.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "mindmap"
+  ]
+}
