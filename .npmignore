@@ -6,4 +6,5 @@ example
 .eslintignore
 .eslintrc
 .map
+.storybook
 dist/stories
