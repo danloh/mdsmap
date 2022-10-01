@@ -1,7 +1,7 @@
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-prototype-builtins */
 
-import * as d3 from 'd3';
+import d3 from 'd3';
 import { flextree } from './flextree';
 
 function getTextWidth(text: any, font: any) {
@@ -14,13 +14,15 @@ function getTextWidth(text: any, font: any) {
   return metrics.width;
 }
 
-function traverseBranchId(node: any, branch: any, state: any) {
+function traverseBranchId(node: any, branch: number, state: any) {
+  // console.log("branch", branch)
   if (!("branch" in node)) {
     node.branch = branch;
   }
   if (node.children) {
-    node.children.forEach((d: any) => {
-      traverseBranchId(d, branch, state);
+    node.children.forEach((d: any, i: number) => {
+      // console.log("sub i", i)
+      traverseBranchId(d, i + branch, state);
     });
   }
 }
@@ -42,7 +44,7 @@ function traverseTruncateLabels(node: any, length: any) {
     node.name = node.name.slice(0, length - 1) + '\u2026';
   }
   if (node.children) {
-    node.children.forEach(function(n: any) {
+    node.children.forEach((n: any) => {
       traverseTruncateLabels(n, length);
     });
   }
@@ -145,7 +147,7 @@ Object.assign(Markmap.prototype, {
 
     // disable panning using right mouse button
     svg.on("mousedown", function() {
-      const ev = d3.event;
+      const ev: any = d3.event;
       if (ev.button === 2) {
         ev.stopImmediatePropagation();
       }
@@ -153,7 +155,7 @@ Object.assign(Markmap.prototype, {
     // // @ts-expect-error all
     const zoom = this.zoom = d3.behavior.zoom()
        .on("zoom", function() {
-        // // @ts-expect-error all
+         // @ts-expect-error all
          this.updateZoom(d3.event.translate, d3.event.scale);
        }.bind(this));
 
@@ -211,8 +213,8 @@ Object.assign(Markmap.prototype, {
     }
 
     if (data.children) {
-      data.children.forEach(function(d: any, i: number) {
-        console.log("i", i)
+      data.children.forEach((d: any, i: number) => {
+        // console.log("i", i)
         traverseBranchId(d, i, state);
       });
     }
@@ -224,7 +226,7 @@ Object.assign(Markmap.prototype, {
   setData: function(data: any) {
     // // @ts-expect-error all
     const state = this.state;
-    console.log("data", data)
+    // console.log("data", data)
     this.preprocessData(data, state.root);
 
     state.root = data;
@@ -353,8 +355,8 @@ Object.assign(Markmap.prototype, {
         .attr('rx', 10)
         .attr('ry', 10)
         .attr('height', state.nodeHeight)
-        .attr('fill', function(d: any) { return d3.rgb(color(d.branch)).brighter(1.2); })
-        .attr('stroke', function(d: any) { return color(d.branch); })
+        .attr('fill', (d: any) => { return d3.rgb(color(d.branch)).brighter(1.2); })
+        .attr('stroke', (d: any) => { return color(d.branch); })
         .attr('stroke-width', 1);
 
       node.select('text')
@@ -388,46 +390,48 @@ Object.assign(Markmap.prototype, {
       // Enter any new nodes at the parent's previous position.
       const nodeEnter = node.enter().append("g")
           .attr("class", "markmap-node")
-          .attr("transform", function(d: any) { return "translate(" + (source.y0 + source.y_size - d.y_size) + "," + source.x0 + ")"; })
+          .attr("transform", function(d: any) { 
+            return "translate(" + (source.y0 + source.y_size - d.y_size) + "," + source.x0 + ")"; 
+          })
           // // @ts-expect-error all
           .on("click", this.click.bind(this));
 
       nodeEnter.append('rect')
         .attr('class', 'markmap-node-rect')
-        .attr("y", function(d: any) { return -linkWidth(d) / 2 })
+        .attr("y", (d: any) => { return -linkWidth(d) / 2 })
         .attr('x', function(d: any) { return d.y_size; })
         .attr('width', 0)
         .attr('height', linkWidth)
-        .attr('fill', function(d: any) { return color(d.branch); });
+        .attr('fill', (d: any) => { return color(d.branch); });
 
       nodeEnter.append("circle")
-          .attr('class', 'markmap-node-circle')
-          .attr('cx', function(d: any) { return d.y_size; })
-          .attr('stroke', function(d: any) { return color(d.branch); })
-          .attr("r", 1e-6)
-          .style("fill", function(d: any) { return d._children ? color(d.branch) : ''; });
+        .attr('class', 'markmap-node-circle')
+        .attr('cx', (d: any) => d.y_size)
+        .attr('stroke', (d: any) => color(d.branch))
+        .attr("r", 1e-6)
+        .style("fill", (d: any) => d._children ? color(d.branch) : '');
 
       nodeEnter.append("text")
-          .attr('class', 'markmap-node-text')
-          .attr("x", function(d: any) { return d.y_size; })
-          .attr("dy", "-5")
-          .attr("text-anchor", function() { return "start"; })
-          .text(function(d: any) { return d.name; })
-          .style("fill-opacity", 1e-6);
+        .attr('class', 'markmap-node-text')
+        .attr("x", (d: any) => d.y_size)
+        .attr("dy", "-5")
+        .attr("text-anchor", () => "start")
+        .text((d: any) => d.name)
+        .style("fill-opacity", 1e-6);
 
       // Transition nodes to their new position.
       const nodeUpdate = node.transition()
-          .duration(state.duration)
-          .attr("transform", function(d: any) { return "translate(" + d.y + "," + d.x + ")"; });
+        .duration(state.duration)
+        .attr("transform", (d: any) => "translate(" + d.y + "," + d.x + ")");
 
       nodeUpdate.select('rect')
         .attr('x', -1)
-        .attr('width', function(d: any) { return d.y_size + 2; });
+        .attr('width', (d: any) => d.y_size + 2);
 
       nodeUpdate.select("circle")
         .attr("r", 4.5)
-        .style("fill", function(d: any) { return d._children ? color(d.branch) : ''; })
-        .style('display', function(d: any) {
+        .style("fill", (d: any) => d._children ? color(d.branch) : '')
+        .style('display', (d: any) => {
           const hasChildren = d.href || d.children || d._children;
           return hasChildren ?  'inline' : 'none';
         });
@@ -439,53 +443,56 @@ Object.assign(Markmap.prototype, {
       // Transition exiting nodes to the parent's new position.
       const nodeExit = node.exit().transition()
         .duration(state.duration)
-        .attr("transform", (d: any) => { return "translate(" + (source.y + source.y_size - d.y_size) + "," + source.x + ")"; })
+        .attr(
+          "transform", 
+          (d: any) => "translate(" + (source.y + source.y_size - d.y_size) + "," + source.x + ")"
+        )
         .remove();
 
       nodeExit.select('rect')
-        .attr('x', function(d: any) { return d.y_size; })
+        .attr('x', (d: any) => d.y_size)
         .attr('width', 0);
 
       nodeExit.select("circle").attr("r", 1e-6);
 
       nodeExit.select("text")
         .style("fill-opacity", 1e-6)
-        .attr("x", function(d: any) { return d.y_size; });
+        .attr("x", (d: any) => d.y_size);
 
       // Update the links…
       const link = svg.selectAll("path.markmap-link")
-        .data(links, function(d: any) { return d.target.id; });
+        .data(links, (d: any) => d.target.id);
 
       // Enter any new links at the parent's previous position.
       link.enter().insert("path", "g")
         .attr("class", "markmap-link")
-        .attr('stroke', (d: any) => { console.log("d",d); return color(d.target.branch);})
-        .attr('stroke-width', function(l: any) {return linkWidth(l.target);})
-        .attr("d", function() {
+        .attr('stroke', (d: any) => { /* console.log("d",d);  */return color(d.target.branch);})
+        .attr('stroke-width', (l: any) => linkWidth(l.target))
+        .attr("d", () => {
           const o = {x: source.x0, y: source.y0 + source.y_size};
           return linkShape({source: o, target: o});
         });
 
       // Transition links to their new position.
       link.transition()
-          .duration(state.duration)
-          .attr("d", function(d: any) {
-            const s = {x: d.source.x, y: d.source.y + d.source.y_size};
-            const t = {x: d.target.x, y: d.target.y};
-            return linkShape({source: s, target: t});
-          });
+        .duration(state.duration)
+        .attr("d", (d: any) => {
+          const s = {x: d.source.x, y: d.source.y + d.source.y_size};
+          const t = {x: d.target.x, y: d.target.y};
+          return linkShape({source: s, target: t});
+        });
 
       // Transition exiting nodes to the parent's new position.
       link.exit().transition()
-          .duration(state.duration)
-          .attr("d", function() {
-            const o = {x: source.x, y: source.y + source.y_size};
-            return linkShape({source: o, target: o});
-          })
-          .remove();
+        .duration(state.duration)
+        .attr("d", () => {
+          const o = {x: source.x, y: source.y + source.y_size};
+          return linkShape({source: o, target: o});
+        })
+        .remove();
 
       // Stash the old positions for transition.
-      nodes.forEach(function(d: any) {
+      nodes.forEach((d: any) => {
         d.x0 = d.x;
         d.y0 = d.y;
       });

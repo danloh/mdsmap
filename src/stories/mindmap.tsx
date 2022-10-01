@@ -19,7 +19,7 @@ export function Mindmap(props: Props) {
     }
 
     const data = transform(parseMd(mdValue, {}));
-    const mapsvg = markmap(svgRef.current, data, {
+    markmap(svgRef.current, data, {
       preset: 'colorful', // or default
       linkShape: 'diagonal' // or bracket
     });
@@ -34,9 +34,7 @@ export function Mindmap(props: Props) {
   }, [renderSVG]);
 
   return (
-    <div
-      className={`w-full relative select-none ${className}`}
-    >
+    <div className={className} style={{backgroundColor: 'white'}}>
       <svg
         id= "mindmap"
         data-testid="mindmap-svg"

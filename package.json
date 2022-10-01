@@ -1,7 +1,7 @@
 {
   "name": "mdkit-mdmap",
   "description": "Markdown to Mindmap",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "license": "AGPL-3.0-or-later",
@@ -43,7 +43,9 @@
     
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
-    
+    "@types/d3": "3.5.47",
+    "@types/remarkable": "2.0.3",
+
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
     "babel-jest": "^27.5.1",

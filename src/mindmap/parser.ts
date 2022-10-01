@@ -49,7 +49,7 @@ function autoCollapse(node: any, offset: any) {
     offset += 1;
   }
   if (node.children) {
-    node.children = node.children.map(function(child: any) {
+    node.children = node.children.map((child: any) => {
       if (child.autoCollapse && child.children && child.children.length === 1) {
         return autoCollapse(child.children[0], offset + 1);
       }
@@ -77,23 +77,23 @@ export function parse(text: string, options: any) {
   let depth = 0;
   for (let i = 0; i < tokens.length; i += 1) {
     if (tokens[i].type === 'heading_open') {
-      // // @ts-expect-error type
+      // @ts-expect-error type
       depth = tokens[i].hLevel;
       headings.push({
         depth: depth,
-        // // @ts-expect-error type
+        // @ts-expect-error type
         line: tokens[i].lines[0],
-        // // @ts-expect-error type
+        // @ts-expect-error type
         name: tokens[i+1].content || ''
       });
       i += 1;
     } else if (tokens[i].type === 'inline') {
       if (parseLinks) {
         headings = headings.concat(
-          // // @ts-expect-error type
-          extractLinks(tokens[i].children).map(function(x) {
+          // @ts-expect-error type
+          extractLinks(tokens[i].children).map((x) => {
             x.depth = depth + 1;
-            // // @ts-expect-error type
+            // @ts-expect-error type
             x.line = tokens[i].lines[0];
             return x;
           })
@@ -106,7 +106,7 @@ export function parse(text: string, options: any) {
         case 'ordered_list_open':
           headings.push({
             depth: depth + 1,
-            // // @ts-expect-error type
+            // @ts-expect-error type
             line: tokens[i].lines[0],
             name: '',
             autoCollapse: true
@@ -121,18 +121,18 @@ export function parse(text: string, options: any) {
         case 'list_item_open': {
           const heading: any = {
             depth: depth,
-            // // @ts-expect-error type
+            // @ts-expect-error type
             line: tokens[i].lines[0],
           };
           if (tokens[i+1].type === "list_item_close") {
             heading.name = "";
             i += 1;
           } else {
-            // // @ts-expect-error type
+            // @ts-expect-error type
             heading.name = extractText(tokens[i+2].children || []);
 
             if (parseLinks) {
-              // // @ts-expect-error type
+              // @ts-expect-error type
               const childLink = parse(tokens[i+2].content || '', options)[0];
               if (childLink) {
                 heading.href = childLink.href;
@@ -146,9 +146,9 @@ export function parse(text: string, options: any) {
         case 'dt_open':
           headings.push({
             depth: depth,
-            // // @ts-expect-error type
+            // @ts-expect-error type
             line: tokens[i].lines[0],
-            // // @ts-expect-error type
+            // @ts-expect-error type
             name: tokens[i+1].content || ''
           });
           i += 1;
@@ -170,8 +170,7 @@ export function transform(headings: any[]) {
   const stack: any[] = [];
   let tmp: any;
 
-  headings.forEach(function(h) {
-
+  headings.forEach((h) => {
     while (h.depth < node.depth + 1) {
       node = stack.pop();
     }
