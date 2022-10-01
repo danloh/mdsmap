@@ -1,10 +1,10 @@
 {
-  "name": "mds-map",
+  "name": "mdkit-mdmap",
   "description": "Markdown to Mindmap",
-  "version": "23",
+  "version": "0.1.0",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "license": "AGPL",
+  "license": "AGPL-3.0-or-later",
   "scripts": {
     "test": "jest",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet",
@@ -35,10 +35,10 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
-    "@storybook/addon-actions": "^6.5.10",
-    "@storybook/addon-essentials": "^6.5.10",
-    "@storybook/addon-links": "^6.5.10",
-    "@storybook/react": "^6.5.10",
+    "@storybook/addon-actions": "^6.5.12",
+    "@storybook/addon-essentials": "^6.5.12",
+    "@storybook/addon-links": "^6.5.12",
+    "@storybook/react": "^6.5.12",
     "@types/jest": "^27.4.1",
     
     "@types/react": "^17.0.43",
@@ -62,7 +62,7 @@
     "source-map-loader": "^3.0.1",
     "ts-loader": "^9.2.8",
     "tsc-watch": "^4.6.2",
-    "typescript": "4.7.4"
+    "typescript": "4.8.4"
   },
   "peerDependencies": {
     "react": "^16.0.0 || ^17.0.0",

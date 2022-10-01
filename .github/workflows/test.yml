@@ -16,6 +16,6 @@ jobs:
       with:
         node-version: 16.x
 
-    - run: yarn && yarn test 
+    # - run: yarn && yarn test 
     # - run: yarn tc 
     # - run: yarn lint 

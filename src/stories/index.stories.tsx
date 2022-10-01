@@ -19,6 +19,7 @@ const Template: Story<Props> = args => <Mdmap {...args} />;
 
 export const Headings = Template.bind({});
 Headings.args = {
+  dark: true,
   defaultValue: `# Heading 1
 
 ## Heading 2 

@@ -12,8 +12,7 @@
     "lib": ["dom", "es2020"],
     "jsx": "react",
     "types": [
-      "react",
-      "jest"
+      "react"
     ],
     "rootDir": "src",
     "outDir": "dist",
