@@ -1,7 +1,6 @@
 
 export { parse as parseMd, transform } from "./mindmap/parser";
 export { default as markmap }  from "./mindmap/view";
-export { Mindmap } from "./mindmap/mindmap";
 
 export type Props = {
   /** An optional identifier */

@@ -1,7 +1,7 @@
 {
   "name": "mdkit-mdmap",
   "description": "Markdown to Mindmap",
-  "version": "0.1.0",
+  "version": "0.0.2",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "license": "AGPL-3.0-or-later",

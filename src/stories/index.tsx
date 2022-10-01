@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Mindmap } from "..";
+import { Mindmap } from "./mindmap";
 
 export default function Example(props) {
   const { body } = document;

@@ -1,5 +1,6 @@
 svg#mindmap {
   width: 100%;
+  min-height: 600px;
 }
 
 .markmap-node {

@@ -1,11 +1,5 @@
-import React from 'react';
-import {
-  useCallback,
-  useEffect,
-  useRef,
-} from 'react';
-import markmap  from './view';
-import { parse, transform } from './parser';
+import React, { useCallback, useEffect, useRef } from 'react';
+import { parseMd, transform, markmap } from '..';
 import './mindmap.css';
 
 type Props = {
@@ -24,12 +18,12 @@ export function Mindmap(props: Props) {
       return;
     }
 
-    const data = transform(parse(mdValue, {}));
+    const data = transform(parseMd(mdValue, {}));
     const mapsvg = markmap(svgRef.current, data, {
       preset: 'colorful', // or default
       linkShape: 'diagonal' // or bracket
     });
-  }, []);
+  }, [mdValue]);
 
   useEffect(() => {
     if (!svgRef.current) {
@@ -37,10 +31,7 @@ export function Mindmap(props: Props) {
     }
 
     renderSVG();
-
-    
   }, [renderSVG]);
-
 
   return (
     <div
