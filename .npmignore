@@ -5,6 +5,11 @@ example
 .github
 .eslintignore
 .eslintrc
+.gitattributes
+.gitignore
 .map
 .storybook
+devlog.md
+babel.config.js
+tsconfig.json
 dist/stories

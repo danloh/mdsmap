@@ -24,9 +24,9 @@ Headings.args = {
 
 ## Heading 2 
 
-- h1
-- h2
-- title
+- h1 \`inline code\`
+- h2 **Hola** 
+- title Handbook of rust date structure \n and algorithms handson 
 
 ## bold title
 

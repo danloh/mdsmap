@@ -19,6 +19,9 @@ export function Mindmap(props: Props) {
     }
 
     const data = transform(parseMd(mdValue, {}));
+    console.log("parsed md", parseMd(mdValue, {}));
+    console.log("transform data", data);
+
     markmap(svgRef.current, data, {
       preset: 'colorful', // or default
       linkShape: 'diagonal' // or bracket
