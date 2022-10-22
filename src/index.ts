@@ -1,5 +1,5 @@
 
-export { parse as parseMd, transform } from "./mindmap/parser";
+export { parse, transform } from "./mindmap/parser";
 export { default as markmap }  from "./mindmap/view";
 
 export type Props = {

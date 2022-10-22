@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import { parseMd, transform, markmap } from '..';
+import { parse, transform, markmap } from '..';
 import './mindmap.css';
 
 type Props = {
@@ -18,8 +18,8 @@ export function Mindmap(props: Props) {
       return;
     }
 
-    const data = transform(parseMd(mdValue, {links: false}));
-    console.log("parsed md", parseMd(mdValue, {}));
+    const data = transform(parse(mdValue, {links: false}));
+    console.log("parsed md", parse(mdValue, {}));
     console.log("transform data", data);
 
     markmap(svgRef.current, data, {
