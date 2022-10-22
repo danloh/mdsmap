@@ -18,7 +18,7 @@ export function Mindmap(props: Props) {
       return;
     }
 
-    const data = transform(parseMd(mdValue, {}));
+    const data = transform(parseMd(mdValue, {links: false}));
     console.log("parsed md", parseMd(mdValue, {}));
     console.log("transform data", data);
 

@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Remarkable } from 'remarkable';
 
-function extractLinks(tokens: any[]) {
+function extractLinks(tokens: Remarkable.Token[]) {
   const result: any[] = [];
+  // console.log("extract link tokens", tokens)
   let href: any;
   let parts: any;
-  for (let i = 0; i < tokens.length; i += 1) {
-    const token = tokens[i];
+  for (const token of tokens) {
     switch (token.type) {
       case "link_open":
-        href = token.href;
+        href = (token as Remarkable.LinkOpenToken).href;
         parts = [];
         break;
       case "text":
         if (parts) {
-          parts.push(token.content)
+          parts.push((token as Remarkable.TextToken).content)
         }
         break;
       case "link_close":
@@ -29,14 +29,22 @@ function extractLinks(tokens: any[]) {
   return result;
 }
 
-function extractText(tokens: any[]) {
-  const result: any[] = [];
-  for (let i = 0; i < tokens.length; i += 1) {
-    const token = tokens[i];
-    if (token.type === "text" && token.content) {
-      result.push(token.content);
+// ref: https://github.com/jonschlinkert/remarkable/blob/58b6945f203ca7a0bb5a0785df90a3a6a8b9e59c/lib/rules.js
+function extractText(tokens: Remarkable.Token[]) {
+  // console.log("extract text tokens", tokens)
+  const result: string[] = [];
+  for (const token of tokens) {
+    const typ = token.type;
+    if (typ === 'text') {
+      result.push((token as Remarkable.TextToken).content || ' ');
+    } else if (typ === 'code') {
+      result.push((token as Remarkable.CodeToken).content || ' ');
+    } else if (typ === 'link_open') {
+      result.push(`(${(token as Remarkable.LinkOpenToken).href}) ` || '');
     } else if (token.type === "softbreak") {
-      break;
+      result.push(' ');
+    } else {
+      console.log(`Not support ${token.type}: `, token);
     }
   }
   return result.join('');

@@ -20,22 +20,34 @@ const Template: Story<Props> = args => <Mdmap {...args} />;
 export const Headings = Template.bind({});
 Headings.args = {
   dark: true,
-  defaultValue: `# Heading 1
+  defaultValue: `# Rules
 
-## Heading 2 
+## Markdown shortcuts 
 
-- h1 \`inline code\`
-- h2 **Hola** 
-- title Handbook of rust date structure \n and algorithms handson 
+- code: \`inline code\`
+- style:  **bold**, *italic* __underline__, ==mark==, 1^st^, 
+- text: title Handbook of rust date structure \n and algorithms handson 
+- link: [mdSilo](https://mdsilo.com) and <https://mdsilo.com>
 
-## bold title
+## Extensions
 
-### Heading 3
+* Math: inline math $x+y=2$.
+* Notice block: info, warning, tips.
+* Wiki Link:[[wiki]].
+* Hashtag: #tips#
 
+## Numbered List
 
-[9781788995528_HANDSON_DATA_STRUCTURES_AND_ALGORITHMS_WITH_RUST.pdf 5069677](blob:http://localhost:6007/dd515fbd-3cf5-4dad-b305-4ff67b49a8a7)
+1. Type \`1.\` to create numbered list(ordered list).
+2. Nested numbered list is supported.
+
+## Check List(Task List)
+
+- [x] Type \`[]\` to create Check list.
+- [x] Support nested Check list too.
+- [x] Main task.
 
 ## Reference 
 
-#### Heading 4`,
+### markmap package`,
 };
