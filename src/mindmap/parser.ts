@@ -168,9 +168,9 @@ export function parse(text: string, options: any) {
   return headings;
 }
 
-export function transform(headings: any[]) {
+export function transform(headings: any[], rootName = 'root') {
   let root = {
-    name: 'root',
+    name: rootName,
     depth: 0,
     children: [] as any[],
   };
