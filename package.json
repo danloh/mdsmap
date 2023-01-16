@@ -35,17 +35,17 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
-    "@storybook/addon-actions": "^6.5.12",
-    "@storybook/addon-essentials": "^6.5.12",
-    "@storybook/addon-links": "^6.5.12",
-    "@storybook/react": "^6.5.12",
-    "@types/jest": "^27.4.1",
+    "@storybook/addon-actions": "^6.5.15",
+    "@storybook/addon-essentials": "^6.5.15",
+    "@storybook/addon-links": "^6.5.15",
+    "@storybook/react": "^6.5.15",
     
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
     "@types/d3": "3.5.47",
     "@types/remarkable": "2.0.3",
 
+    "@types/jest": "^27.4.1",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
     "babel-jest": "^27.5.1",
@@ -61,10 +61,9 @@
     "jest": "^27.5.1",
     "prettier": "^2.6.2",
     
-    "source-map-loader": "^3.0.1",
     "ts-loader": "^9.2.8",
     "tsc-watch": "^4.6.2",
-    "typescript": "4.8.4"
+    "typescript": "4.9.4"
   },
   "peerDependencies": {
     "react": "^16.0.0 || ^17.0.0",
